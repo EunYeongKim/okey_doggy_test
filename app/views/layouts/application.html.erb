@@ -2,13 +2,54 @@
 <html>
 <head>
   <title>Workspace</title>
+  
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
+  <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      
   <%= csrf_meta_tags %>
+  
 </head>
-<body>
+  <body>
+    <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Okey-Doggy</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <!--웹 형태-->
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/posts/index">board</a></li>
+        <% if user_signed_in? %>
+        <li><%= current_user.name %></li>
+        <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
+        <% else %>
+        <li><a href="/users/sign_in">sign in</a></li>
+        <li><a href="/users/sign_up">sign up</a></li>
+        <% end %>
+        <li><a href="#">Mobile</a></li>
+      </ul>
+      <!--모바일 형태-->
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="/posts/index">board</a></li>
+        <% if user_signed_in? %>
+        <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
+        <% else %>
+        <li><a href="/users/sign_in">sign in</a></li>
+        <li><a href="/users/sign_up">sign up</a></li>
+        <% end %>
+        <li><a href="#">Mobile</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <%= yield %>
 
-<%= yield %>
-
-</body>
+  </body>
 </html>

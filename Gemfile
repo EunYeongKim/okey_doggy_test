@@ -1,6 +1,13 @@
 source 'https://rubygems.org'
 
+gem 'will_paginate-bootstrap'
 
+gem "carrierwave"
+gem "mini_magick"
+
+gem 'will_paginate-materialize'
+
+gem 'will_paginate'
 gem 'materialize-sass'
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

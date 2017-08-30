@@ -1,8 +1,20 @@
 Rails.application.routes.draw do
+  get 'users/new'
+
   devise_for :users
-  # get 'posts/index'
+  
   root 'posts#index'
-  resources :posts
+  resources :posts do
+    post "/like", to: "likes#like_toggle"
+    resources :comments, only: [:create, :edit, :destroy]
+  end
+  
+  get '/posts/new' => 'posts#create'
+  get '/posts/show/:id' => 'posts#show'
+  
+  get 'mypage' => 'users/edit' # 마이페이지 누르면 정보 수정창으로 가게
+  get 'index' => 'posts#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

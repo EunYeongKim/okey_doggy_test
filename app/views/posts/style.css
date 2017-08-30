@@ -1,0 +1,15 @@
+.container writer_card {
+    border-radius: 20px;
+    border-color: #ffc107;
+    border-width: 10px;
+}
+
+.container writer_title {
+    font-size:30pt;
+}
+
+.writer_card {
+    border-radius: 20px;
+    border-color: #ffc107;
+    border-width: 10px;
+}

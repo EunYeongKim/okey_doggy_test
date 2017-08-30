@@ -1,3 +1,31 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+img {
+    width: 100px;
+}
+
+.pre-line {
+    white-space: pre-line;
+}
+
+.thumbnail {
+    vertical-align :middle;
+}
+
+.pagination a li.active {
+    background-color: #ffca28;
+    color: #fff;
+    font-size: 20px;
+}
+
+
+.pagination a {
+    color: #616161; /* Gray */
+    font-size: 20px;
+}
+
+
+
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

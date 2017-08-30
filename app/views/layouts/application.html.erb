@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
-  
+  <title>Okey-Doggy</title>
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -17,35 +18,76 @@
       
   <%= csrf_meta_tags %>
   
+  
+  <style>
+    .sign_out {
+     text-color: #ffca28;
+    }
+    
+  body {
+  font-family:'나눔고딕';
+  }
+  
+  .logo_font {
+    font-family:'A북두칠성';
+  }
+    
+    
+  </style>
+  
 </head>
-  <body>
-    <nav>
-    <div class="nav-wrapper">
-      <a href="/" class="brand-logo">Okey-Doggy</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+
+<body>
+    
+    <nav class="nav-wrapper amber lighten-1">
+    <div class="nav-wrapper amber lighten-1" style="width:970px; margin:0 auto;">
+      <a href="/" class="brand-logo"><img src="./Logo.png" style="float:middle;width:42px;height:42px;"><span class="logo_font grey-text text-darken-4">&nbsp;&nbsp;Okey-Doggy</span></a>
+
       <!--웹 형태-->
       <ul class="right hide-on-med-and-down">
-        <li><a href="/posts/index">board</a></li>
+        
         <% if user_signed_in? %>
-        <li><%= current_user.name %></li>
-        <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
+        <li><a href="index">게시판</a></li>
+        
+         <!-- Dropdown Trigger -->
+  <a class='dropdown-button btn grey darken-4' href='#' data-activates='dropdown1' style='color:#FFFFFF' data-constrainwidth="false"><%= current_user.name %></a>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'style='color:#ffca28'>
+    <li><a href="users/edit" style='color:#ffca28'>마이페이지</a></li> 
+    <li class='sign_out amber-text'><%= link_to '로그아웃', destroy_user_session_path, method: 'delete' %></li>
+    <!--<li><a href="#!" style='color:#ffca28'>two</a></li>-->
+    <!--<li class="divider"></li>-->
+    <!--<li><a href="#!" style='color:#ffca28'>three</a></li>-->
+    <!--<li><a href="#!"><i class="material-icons">view_module</i>four</a></li>-->
+    <!--<li><a href="#!"><i class="material-icons">cloud</i>five</a></li>-->
+  </ul>
+        
+        <!--<li><%= current_user.name %></li>-->
+        
+        <!--<div class="dropdown">-->
+  <!--<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
+    <!--Dropdown-->
+  <!--  <%= current_user.name %>-->
+  <!--  <span class="caret"></span>-->
+  <!--</button>-->
+  <!--<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+  <!--  <li><a href="#">Action</a></li>-->
+  <!--  <li><a href="#">Another action</a></li>-->
+  <!--  <li><a href="#">Something else here</a></li>-->
+  <!--  <li role="separator" class="divider"></li>-->
+  <!--  <li><a href="#">Separated link</a></li>-->
+  <!--</ul>-->
+<!--</div>-->
+        
+        
         <% else %>
-        <li><a href="/users/sign_in">sign in</a></li>
-        <li><a href="/users/sign_up">sign up</a></li>
+        
+        <li><a href="/users/sign_in">로그인</a></li>
+        <li><a href="/users/sign_up">회원가입</a></li>
         <% end %>
-        <li><a href="#">Mobile</a></li>
-      </ul>
-      <!--모바일 형태-->
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="/posts/index">board</a></li>
-        <% if user_signed_in? %>
-        <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
-        <% else %>
-        <li><a href="/users/sign_in">sign in</a></li>
-        <li><a href="/users/sign_up">sign up</a></li>
-        <% end %>
-        <li><a href="#">Mobile</a></li>
-      </ul>
+        
     </div>
   </nav>
   

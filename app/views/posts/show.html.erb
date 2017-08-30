@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+         <!--<link rel = "stylesheet" type ="text/css" href = "/app/views/posts/style.css" />-->
+         <style>
+         .container {
+             width: 1000px;
+         }
+         .writer_card {
+            border: 7px solid #ffc107;
+            width: 900px;
+            height: auto;
+            border-radius: 8em;
+            margin-left:30px;
+        }
+
+        .writer_title {
+            font-size:35pt;
+            margin-left:55px;
+            margin-top:10px;
+        }
+        .writer_nickname {
+            font-size:12pt;
+            margin-top:30px;
+        }
+        .content {
+            font-size:13pt;
+            margin-left:55px;
+        }
+        .image {
+            margin-left:55px;
+            margin-bottom:20px;
+        }
+        .comment_nickname {
+            font-size:18pt
+        }
+        .comment_content {
+            font-size:11pt;
+            margin-left:25px;
+        }
+        .comment_icon {
+             margin-left:55px;
+             text-align:left; 
+             margin-top:15px;
+        }
+        .container_custom {
+            width: 850px;
+            margin-left:80px;
+        }
+        .write_thumb {
+            width: 40px;
+            height: 40px;
+            margin-top: 20px;
+            margin-left: 5px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="writer_card" style="border-radius : 0 6em 0 6em;">
+                
+                <div class="row">
+                    <div class="col writer_title">
+                      <%= @post.title%>
+                    </div>
+                     
+                    <div class="media" height="50">
+                        <% if @post.user.avatar %>
+                          <img class="circle responsive-img write_thumb" src="<%= @post.user.avatar.thumb.url %>">
+                        <% end %>
+                    </div>
+                    
+                    <div class="col-md-auto writer_nickname">
+                        <%= @post.user.nickname%>
+                    </div>
+                    
+                    <div class="col col-lg-2 writer_nickname">
+                      <%= @post.created_at%>
+                    </div>
+                 </div>
+                
+                <div class="mt-5 content"><%= @post.content%></div>
+                <div class="mt-2 image"><img src="<%= @post.image.url %>"></div>
+            
+            </div>
+            
+            
+            
+            <div class="container_custom d-flex justify-content-end">
+              <div class="p-2"><% if current_user.id == @post.user.id %>
+                    <%= link_to "수정", edit_post_path(@post) %></div>
+                <div class="p-2"><%= link_to "삭제", post_path(@post), method:"delete" %>
+                <% end %>
+                </div>
+            </div>
+            
+            <div style="width:920px; text-align:right; margin-top:15px;">
+                <div class="mr-auto p-2"><i class="small material-icons">insert_comment</i> &nbsp; <%= @post.comments.count %></div>
+            </div>
+
+            
+            <div style="width:920px; text-align:right; margin-top:15px;">
+                <%= @post.likes.size %>명이 좋아합니다.
+                <% if current_user.is_like?(@post) %>
+                    <i class="small material-icons">favorite</i><%= link_to "좋아요 취소", post_like_path(@post), method: "post"%>
+                <% else %>
+                    <i class="small material-icons">favorite_border</i><%= link_to "좋아요", post_like_path(@post), method: "post"%>
+                <% end %>
+            </div>
+            
+            <!--댓글 작성-->
+            <%= form_tag post_comments_path(@post) do %>
+            
+            <div style="">
+                <div class="input-field" style="width:600px; margin-left:50px;">
+                
+              </div>
+              <div class="input-field" style="width:100px;">
+                
+              </div>
+                
+            </div>
+            
+            <div style="width:1000px;">
+                <%= text_area_tag :content, nil, class: "materialize-textarea", placeholder: "댓글을 작성해주세요.", required: true %>
+                <%= button_tag "댓글 쓰기", class: "btn amber" %>
+            </div>
+            
+              
+            <% end %>
+            
+            <% if @post.comments.present? %>
+              <ul class="collection">
+              <% @post.comments.each do |comment| %>
+                <li class="collection-item mt-3 avatar">
+                        <% if comment.user.avatar %>
+                        <img class="circle thumbnail" src="<%= comment.user.avatar.thumb.url %>">
+                        <% end %>
+                      <span class="title comment_nickname"><%= comment.user.nickname %></span>
+                      <span class="right"><%= comment.created_at %></span>
+                      <p class="pre-line comment_content mt-3"><%= comment.content %></p>
+                      <% if comment.user.id == current_user.id %>
+                        <div style="text-align:right">
+                            <%= link_to "수정", edit_post_comment_path(@post, comment) %>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <%= link_to "삭제", post_comment_path(@post, comment), method: "delete" %>
+                        </div>
+                      <% end %>
+                </li>
+              <% end %>
+              </ul>
+            <% end %>
+            
+        </div>
+        
+    </body>
+</html>
